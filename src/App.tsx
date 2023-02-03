@@ -7,8 +7,11 @@ import {
   Navigate,
 } from "react-router-dom";
 import NewNote from "./pages/NewNote";
+import { RawNoteData } from "./types";
 
 function App() {
+  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES");
+  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
   return (
     <Container className="m-4">
       <Router>
