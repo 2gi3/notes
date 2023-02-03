@@ -7,11 +7,21 @@ import {
   Navigate,
 } from "react-router-dom";
 import NewNote from "./pages/NewNote";
-import { RawNoteData } from "./types";
+import { RawNote, Tag } from "./types";
+import { useLocalStorage } from "./functions/hooks";
+import { useMemo } from "react";
 
 function App() {
-  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES");
+  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+  const notesWithTags = useMemo(() => {
+    return notes.map((note) => {
+      return {
+        ...note,
+        tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
+      };
+    });
+  }, [notes, tags]);
   return (
     <Container className="m-4">
       <Router>
