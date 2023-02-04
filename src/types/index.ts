@@ -14,6 +14,8 @@ export type NoteData = {
 
 export type NoteFormProps = {
     onSubmit: (data: NoteData) => void
+    onAddTag: (tag: Tag) => void
+    availableTags: Tag[]
 }
 
 export type RawNote ={
@@ -23,4 +25,10 @@ export type RawNoteData = {
     title: string
     markdown: string
     tagIds: string[]
+}
+
+export type NewNoteProps = {
+    onSubmit: (data:NoteData) => void
+    onAddTag: (tag: Tag) => void
+    availableTags: Tag[]
 }
