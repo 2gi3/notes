@@ -32,3 +32,14 @@ export type NewNoteProps = {
     onAddTag: (tag: Tag) => void
     availableTags: Tag[]
 }
+
+export type SimplyfiedNote = {
+    tags: Tag[]
+    title: string
+    id: string
+}
+
+export type NoteListProp = {
+    availableTags: Tag[]
+    notes: SimplyfiedNote[]
+}
