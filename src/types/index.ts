@@ -33,6 +33,12 @@ export type NewNoteProps = {
     availableTags: Tag[]
 }
 
+export type EditNoteProps = {
+    onSubmit: (id:string, data:NoteData) => void
+    onAddTag: (tag: Tag) => void
+    availableTags: Tag[]
+}
+
 export type SimplyfiedNote = {
     tags: Tag[]
     title: string
