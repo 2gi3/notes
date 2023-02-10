@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import { Note } from "../types";
 
 export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   const [value, setValue] = useState<T>(() => {
@@ -18,4 +20,8 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
     localStorage.setItem(key, JSON.stringify(value));
   }, [value, key]);
   return [value, setValue] as [T, typeof setValue];
+}
+
+export function useNote() {
+  return useOutletContext<Note>();
 }

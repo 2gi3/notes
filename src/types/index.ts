@@ -43,3 +43,7 @@ export type NoteListProp = {
     availableTags: Tag[]
     notes: SimplyfiedNote[]
 }
+
+export type NoteLayoutProps = {
+    notes: Note[]
+}
