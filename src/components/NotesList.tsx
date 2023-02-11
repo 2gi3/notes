@@ -4,10 +4,18 @@ import ReactSelect from "react-select";
 import { useMemo, useState } from "react";
 import { Tag, NoteListProp } from "../types";
 import NoteCard from "./NoteCard";
+import EditTagsModal from "./EditTagsModal";
 
-function NotesList({ availableTags, notes }: NoteListProp) {
+function NotesList({
+  availableTags,
+  notes,
+  onUpdateTag,
+  onDeleteTag,
+}: NoteListProp) {
   const [selectedTags, setSelectdTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
+  const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
+
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
@@ -30,7 +38,14 @@ function NotesList({ availableTags, notes }: NoteListProp) {
             <Link to="/new">
               <Button variant="primary">Create</Button>
             </Link>
-            <Button variant="outline-secondary">Edit Tags</Button>
+            <Button
+              onClick={() => {
+                setEditTagsModalIsOpen(true);
+              }}
+              variant="outline-secondary"
+            >
+              Edit Tags
+            </Button>
           </Stack>
         </Col>
       </Row>
@@ -78,6 +93,13 @@ function NotesList({ availableTags, notes }: NoteListProp) {
           );
         })}
       </Row>
+      <EditTagsModal
+        show={editTagsModalIsOpen}
+        handleClose={() => setEditTagsModalIsOpen(false)}
+        availableTags={availableTags}
+        onUpdateTag={onUpdateTag}
+        onDeleteTag={onDeleteTag}
+      />
     </>
   );
 }

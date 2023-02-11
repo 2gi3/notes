@@ -48,6 +48,8 @@ export type SimplyfiedNote = {
 export type NoteListProp = {
     availableTags: Tag[]
     notes: SimplyfiedNote[]
+    onDeleteTag: (id:string)=> void
+    onUpdateTag: (id: string, label: string)=> void
 }
 
 export type NoteLayoutProps = {
@@ -56,4 +58,12 @@ export type NoteLayoutProps = {
 
 export type NoteProps = {
     onDelete: (id: string)=>void
+}
+
+export type EditTagsModalProps = {
+    show: boolean
+    availableTags: Tag[]
+    handleClose: ()=> void
+    onDeleteTag: (id:string)=> void
+    onUpdateTag: (id: string, label: string)=> void
 }
