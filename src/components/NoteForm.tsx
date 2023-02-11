@@ -5,10 +5,17 @@ import CreatableReactSelect from "react-select/creatable";
 import { NoteFormProps, Tag } from "../types";
 import { v4 as uuidV4 } from "uuid";
 
-function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
+function NoteForm({
+  onSubmit,
+  onAddTag,
+  availableTags,
+  title = "",
+  markdown = "",
+  tags = [],
+}: NoteFormProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectdTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectdTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,7 +35,7 @@ function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control ref={titleRef} required />
+              <Form.Control ref={titleRef} required defaultValue={title} />
             </Form.Group>
           </Col>
           <Col>
@@ -61,7 +68,13 @@ function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
         <Col>
           <Form.Group controlId="Markdown">
             <Form.Label>Body</Form.Label>
-            <Form.Control ref={markdownRef} required as="textarea" rows={15} />
+            <Form.Control
+              ref={markdownRef}
+              required
+              as="textarea"
+              rows={15}
+              defaultValue={markdown}
+            />
           </Form.Group>
         </Col>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
